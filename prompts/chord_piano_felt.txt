@@ -1,0 +1,95 @@
+Assume the role of a great mathematician, musician, artisit and programmer and help us with the following important task for
+ making a musical piece for a train footage during a sunset. We want a simple piece with low tempo (80) composed of expansive
+
+
+and slow growing chords, a nice and minimal bassline and simple drums.
+ First we will focus on the chords: We are using a Felt piano for these chords... 
+there is a lot of reverb on the audio so the chords need to be spacious and long.
+
+Create an 8-bar expansive chord progression loop that roughly follows works of scheubert in F minor scale.
+Your output must strictly adhere to the following format for each note:
+time note duration velocity channel
+Description of the vibe:
+Atmospheric, tense, and slightly dissonant. The chord progression should create a dark, brooding backdrop for the melody and bassline.
+Music Characteristics:
+
+Key: F minor  (F, G, Ab, Bb, C, Db, Eb, F)
+Tempo: 80 BPM
+Time Signature: 4/4
+Length: 8 bars
+
+Chord Progression Guidelines:
+
+Use primarily minor and diminished chords for a darker sound.
+
+Primary chords: Fm, Bbm, Cm
+Diminished chord: G° (G diminished)
+
+
+Incorporate the raised 7th (E natural) in some chords for the harmonic minor flavor.
+
+You can use F minor (harmonic) chord: F - Ab - C - E
+Or C major chord: C - E - G (as the dominant in F minor)
+
+
+Use extended chords (7ths, 9ths) for added complexity.
+
+Fm7 (F - Ab - C - Eb)
+Fm9 (F - Ab - C - Eb - G)
+Db maj7 (Db - F - Ab - C)
+C7b9 (C - E - G - Bb - Db)
+
+
+Focus on the mid-range (F3 to F5) for the chord voicings.
+
+This range translates to the notes between F3 (174.61 Hz) and F5 (698.46 Hz)
+
+
+Use rhythmic patterns that complement the 4/4 beat without overpowering it.
+
+This guideline remains the same, as it's not key-specific
+
+
+Include occasional suspended or augmented chords for tension.
+
+Fsus4 (F - Bb - C)
+Csus4 (C - F - G)
+F+ (F - A - C#) or C+ (C - E - G#) for augmented chords
+
+
+Rules:
+
+Use absolute timing, where 1.0 represents a quarter note (one beat at 80 BPM).
+Use note names for each chord tone (e.g., A3, C4, E4 for Am).
+Use MIDI channel 0 for the chords.
+Ensure the loop is exactly 8 bars long (32 beats).
+Vary the velocity (60-100) to add dynamics and movement.
+Your output must contain only the note data in the specified format.
+Do not add any explanations, comments, or additional text.
+
+Example (2 bars, Am chord):
+0 A3 0.25 80 0
+0 C4 0.25 80 0
+0 E4 0.25 80 0
+1 A3 0.25 70 0
+1 C4 0.25 70 0
+1 E4 0.25 70 0
+2 A3 0.25 75 0
+2 C4 0.25 75 0
+2 E4 0.25 75 0
+3 A3 0.25 65 0
+3 C4 0.25 65 0
+3 E4 0.25 65 0
+4 A3 0.25 80 0
+4 C4 0.25 80 0
+4 E4 0.25 80 0
+5 A3 0.25 70 0
+5 C4 0.25 70 0
+5 E4 0.25 70 0
+6 A3 0.25 75 0
+6 C4 0.25 75 0
+6 E4 0.25 75 0
+7 A3 0.25 65 0
+7 C4 0.25 65 0
+7 E4 0.25 65 0
+Now, generate an 8-bar dark melodic techno chord progression loop following these guidelines precisely. Remember to only output the MIDI note data without any additional text or explanations.

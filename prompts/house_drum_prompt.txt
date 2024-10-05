@@ -1,0 +1,64 @@
+Create a 4-bar house music loop for drums
+Your output must strictly adhere to the following format for each note:
+time note duration velocity channel
+
+Description of the vibe of the loop is:
+Buttery and soul like 
+
+House Music Characteristics:
+
+Tempo: Typically 120-130 BPM. Use 95 BPM for this loop.
+Time Signature: 4/4
+Key Elements: Steady kick drum on every beat, off-beat hi-hats, snare or clap on beats 2 and 4.
+Groove: Emphasize the "four-on-the-floor" beat with syncopated elements.
+Bassline: If applicable, create a rhythmic, often syncopated bassline.
+Chord Stabs: For melodic instruments, consider adding short, rhythmic chord stabs.
+Build tension and release within the loop structure.
+
+Rules:
+
+Use absolute timing, where 1.0 represents a quarter note (one beat at 95 BPM).
+For drums, use only these Ableton default drum names:
+kick, snare, clap, closed_hat, open_hat, low_tom, mid_tom, high_tom, crash, ride
+For melodic instruments, use note names (e.g., C4, F#5).
+Use MIDI channel 9 for drums and channel 0 for other instruments.
+Ensure the loop is exactly {length} bars long.
+Create a musically interesting and genre-appropriate pattern.
+Vary the velocity to add dynamics and groove (especially important for hi-hats and percussion).
+Your output must contain only the note data in the specified format.
+Do not add any explanations, comments, or additional text.
+
+Instrument-Specific Guidelines:
+
+Drums: Focus on the classic house rhythm. Emphasize kick on every beat, hi-hats on off-beats, snare/clap on 2 and 4. Add occasional open hi-hats or percussion for variation.
+Bass: Create a funky, rhythmic bassline that complements the kick drum. Use notes in the C1 to C3 range.
+Keys/Synth: For chord stabs or melodic elements, use short, rhythmic patterns. Consider using 7th and 9th chords for a classic house sound.
+Lead/Melody: If creating a lead line, keep it simple and catchy. Use repetition with slight variations.
+
+Drum note mapping:
+kick: 36, snare: 38, clap: 39, closed_hat: 42, open_hat: 46,
+low_tom: 41, mid_tom: 47, high_tom: 50, crash: 49, ride: 51
+Example house drum pattern (1 bar):
+0 kick 0.25 120 9
+0.5 closed_hat 0.25 100 9
+1 kick 0.25 120 9
+1 clap 0.25 110 9
+1.5 closed_hat 0.25 100 9
+2 kick 0.25 120 9
+2.5 closed_hat 0.25 100 9
+3 kick 0.25 120 9
+3 clap 0.25 110 9
+3.5 closed_hat 0.25 100 9
+3.75 open_hat 0.25 90 9
+Example house bassline (1 bar):
+0 C2 0.25 100 0
+0.5 C2 0.25 90 0
+1 G1 0.25 100 0
+1.5 C2 0.25 90 0
+2 E2 0.25 100 0
+2.5 C2 0.25 90 0
+3 G1 0.25 100 0
+3.5 C2 0.25 90 0
+
+
+Now, generate a 4-bar house music loop for drums following these guidelines precisely. Remember to only output the MIDI note data without any additional text or explanations.

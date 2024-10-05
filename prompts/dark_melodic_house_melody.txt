@@ -1,0 +1,43 @@
+Create an 8-bar dark melodic techno melody loop in A minor harmonic scale.
+Your output must strictly adhere to the following format for each note:
+time note duration velocity channel
+Description of the vibe:
+Dark, haunting, and hypnotic. The melody should be sparse but impactful, with occasional dissonant touches to enhance the dark atmosphere.
+Music Characteristics:
+
+Key: A minor harmonic (A, B, C, D, E, F, G#)
+Tempo: 95 BPM
+Time Signature: 4/4
+Length: 8 bars
+
+Melodic Guidelines:
+
+Use primarily notes from the A minor harmonic scale.
+Incorporate occasional chromatic notes for tension.
+Focus on the mid to high register (A4 to A6).
+Use repetitive patterns with subtle variations.
+Include moments of silence for breath and tension.
+Emphasize the raised 7th (G#) for the harmonic minor flavor.
+
+Rules:
+
+Use absolute timing, where 1.0 represents a quarter note (one beat at 95 BPM).
+Use note names (e.g., A4, C#5).
+Use MIDI channel 0 for the melody.
+Ensure the loop is exactly 8 bars long (32 beats).
+Vary the velocity (50-120) to add dynamics and emotion.
+Your output must contain only the note data in the specified format.
+Do not add any explanations, comments, or additional text.
+
+Example (2 bars):
+0 A4 0.5 100 0
+1 C5 0.25 90 0
+1.5 E5 0.25 95 0
+2 G#4 1 110 0
+4 F5 0.5 85 0
+4.75 D5 0.25 80 0
+5.5 B4 0.5 90 0
+6.5 A4 0.5 100 0
+7 C5 0.5 95 0
+7.5 E5 0.5 100 0
+Now, generate an 8-bar dark melodic techno melody loop following these guidelines precisely. Remember to only output the MIDI note data without any additional text or explanations.

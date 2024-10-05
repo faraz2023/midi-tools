@@ -1,0 +1,51 @@
+Create a 8-bar music loop for drums. You need to create the drum loop based on what we have for bassline and chords. sparse and expansive. 
+minimal and expressive 
+
+Your output must strictly adhere to the following format for each note:
+time note duration velocity channel
+
+Description of the vibe of the loop is:
+
+
+Tempo: Use 80 BPM for this loop.
+Time Signature: 4/4
+Build tension and release within the loop structure.
+
+Rules:
+
+Use absolute timing, where 1.0 represents a quarter note (one beat at 80 BPM).
+For drums, use only these Ableton default drum names:
+kick, snare, clap, closed_hat, open_hat, low_tom, mid_tom, high_tom, crash, ride
+Use MIDI channel 9 for drums and channel 0 for other instruments.
+Ensure the loop is exactly {length} bars long.
+Create a musically interesting and genre-appropriate pattern.
+Vary the velocity to add dynamics and groove (especially important for hi-hats and percussion).
+Your output must contain only the note data in the specified format.
+Do not add any explanations, comments, or additional text.
+
+Instrument-Specific Guidelines:
+
+Drums: Focus on the classic house rhythm. Emphasize kick on every beat, hi-hats on off-beats, snare/clap on 2 and 4. Add occasional open hi-hats or percussion for variation.
+Bass: Create a funky, rhythmic bassline that complements the kick drum. Use notes in the C1 to C3 range.
+Keys/Synth: For chord stabs or melodic elements, use short, rhythmic patterns. Consider using 7th and 9th chords for a classic house sound.
+Lead/Melody: If creating a lead line, keep it simple and catchy. Use repetition with slight variations.
+
+Drum note mapping:
+kick: 36, snare: 38, clap: 39, closed_hat: 42, open_hat: 46,
+low_tom: 41, mid_tom: 47, high_tom: 50, crash: 49, ride: 51
+
+Example drum pattern (1 bar):
+0 kick 0.25 120 9
+0.5 closed_hat 0.25 100 9
+1 kick 0.25 120 9
+1 clap 0.25 110 9
+1.5 closed_hat 0.25 100 9
+2 kick 0.25 120 9
+2.5 closed_hat 0.25 100 9
+3 kick 0.25 120 9
+3 clap 0.25 110 9
+3.5 closed_hat 0.25 100 9
+3.75 open_hat 0.25 90 9
+
+
+Now, generate a 8-bar house music loop for drums following these guidelines precisely. Remember to only output the MIDI note data without any additional text or explanations.

@@ -1,0 +1,48 @@
+Create an 8-bar dark melodic techno bassline loop in A minor harmonic scale.
+
+Your output must strictly adhere to the following format for each note:
+time note duration velocity channel
+
+Description of the vibe:
+Deep, pulsating, and ominous. The bassline should provide a solid foundation with occasional surprises to maintain interest.
+
+Music Characteristics:
+1. Key: A minor harmonic (A, B, C, D, E, F, G#)
+2. Tempo: 95 BPM
+3. Time Signature: 4/4
+4. Length: 8 bars
+
+Bassline Guidelines:
+1. Focus on the root (A), fifth (E), and raised seventh (G#) for a strong harmonic minor feel.
+2. Use primarily notes in the range of A1 to A3.
+3. Create a driving, rhythmic pattern with some syncopation.
+4. Include occasional slides or pitch bends for added tension.
+5. Use longer notes (half notes, whole notes) sparingly for contrast.
+6. Incorporate subtle rhythmic variations every 2 or 4 bars.
+
+Rules:
+1. Use absolute timing, where 1.0 represents a quarter note (one beat at 95 BPM).
+2. Use note names (e.g., A2, E2).
+3. Use MIDI channel 0 for the bassline.
+4. Ensure the loop is exactly 8 bars long (32 beats).
+5. Vary the velocity (70-110) to add groove and movement.
+6. Your output must contain only the note data in the specified format.
+7. Do not add any explanations, comments, or additional text.
+
+Example (2 bars):
+0 A2 0.5 100 0
+0.75 E2 0.25 90 0
+1 A2 0.5 95 0
+1.75 C3 0.25 85 0
+2 E2 0.5 100 0
+2.5 G#2 0.5 110 0
+3 A2 0.75 95 0
+4 A2 0.5 100 0
+4.75 E2 0.25 90 0
+5 A2 0.5 95 0
+5.75 D3 0.25 85 0
+6 E2 0.5 100 0
+6.5 F2 0.5 90 0
+7 G#2 1 105 0
+
+Now, generate an 8-bar dark melodic techno bassline loop following these guidelines precisely. Remember to only output the MIDI note data without any additional text or explanations.
