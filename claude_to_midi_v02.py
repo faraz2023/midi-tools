@@ -77,7 +77,8 @@ if __name__ == "__main__":
     try:     
 
         # from src.prompts.melody_prompt_v01 import prompt, system_prompt, tempo, time_signature
-        from src.prompts.drums_prompt_v01 import prompt, system_prompt, tempo, time_signature
+        # from src.prompts.drums_prompt_v01 import prompt, system_prompt, tempo, time_signature
+        from src.prompts.chord_prompt_v01 import prompt, system_prompt, tempo, time_signature
         EXPORT_PATH = os.path.join('.', 'MIDI_files_v02')
         os.makedirs(EXPORT_PATH, exist_ok=True)
 
