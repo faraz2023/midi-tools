@@ -3,6 +3,7 @@ import anthropic
 from dotenv import load_dotenv
 from src.utils import create_midi_from_text
 from traceback import format_exc
+import copy
 
 # Load environment variables from .env file
 load_dotenv()
@@ -39,7 +40,7 @@ def generate_midi_text(prompt, context=[]):
     # Pass the system prompt as a top-level parameter
     return get_anthropic_results(messages, system_prompt)
 
-def create_ai_midi(prompt, midi_export_path, tempo=120, time_signature=(4, 4), context=[]):
+def create_ai_midi(prompt, export_path, filename, tempo=120, time_signature=(4, 4), context=[]):
     """Generate MIDI text using Claude API and create a MIDI file."""
 
     if context:
@@ -54,6 +55,14 @@ def create_ai_midi(prompt, midi_export_path, tempo=120, time_signature=(4, 4), c
     # The generated text should already be clean, but let's ensure it
     midi_lines = [line for line in midi_text.split('\n') if line.strip()]
     cleaned_midi_text = '\n'.join(midi_lines)
+
+
+    text_export_path = os.path.join(export_path, f"{filename}.txt")
+    #export text to file
+    with open(text_export_path, 'w') as file:
+        file.write(cleaned_midi_text)
+
+    midi_export_path = os.path.join(export_path, f"{filename}.mid")
     
     create_midi_from_text(cleaned_midi_text, midi_export_path, tempo, time_signature)
     print(f"AI-generated MIDI file '{midi_export_path}' has been created.")
@@ -76,24 +85,43 @@ def find_name_from_prompt_with_ai(prompt):
 if __name__ == "__main__":
     try:     
 
-        # from src.prompts.melody_prompt_v01 import prompt, system_prompt, tempo, time_signature
+        # from src.prompts.melody_prompt_v01 import prompt, system_prompt, tempo, time_signature, per_file_length
         # from src.prompts.drums_prompt_v01 import prompt, system_prompt, tempo, time_signature
-        from src.prompts.chord_prompt_v01 import prompt, system_prompt, tempo, time_signature
+        # from src.prompts.chord_prompt_v01 import prompt, system_prompt, tempo, time_signature
+        # from src.prompts.bassline_prompt_v01 import prompt, system_prompt, tempo, time_signature, per_file_length
+        from src.prompts.techno_drums_prompt_v01 import prompt, system_prompt, tempo, time_signature, per_file_length
         EXPORT_PATH = os.path.join('.', 'MIDI_files_v02')
         os.makedirs(EXPORT_PATH, exist_ok=True)
 
         
-        n = 4  # Expected number of MIDI output files
-        k = 2  # Batch size for context
+        n = 1  # Expected number of MIDI output files
+        k = 0  # Batch size for context
         piece_name = find_name_from_prompt_with_ai(prompt)
-
+        current_path = os.path.join(EXPORT_PATH, piece_name)
+        os.makedirs(current_path, exist_ok=True)
         
         context = []
         for i in range(n):
-            filename_prefix = f"{piece_name}_{i+1}"
-            midi_export_path = os.path.join(EXPORT_PATH, f"{filename_prefix}.mid")
-            midi_text = create_ai_midi(prompt, midi_export_path, tempo, time_signature, context=context[-k:])
-            context.append(midi_text)
+            current_prompt = copy.deepcopy(prompt)
+
+            # adage = f"""The full piece will consists of {n} parts each with {per_file_length} bars in length. This is part {i+1}. 
+            # At each iteration, we are providing you with the previous {k} parts of the piece as context below. Use this information to create a coherent and evolving loop which 
+            # Can sum into a full, cohesive piece.
+            # """
+
+            adage = "The loop will consists of 1 part with 8 bars in length. You are working on the single part."
+
+            current_prompt = f"{adage}\n\n{current_prompt}"
+            filename_prefix = f"{i+1}"
+            export_name = f"{filename_prefix}"
+            # if file already exists, read text from file and add to context
+            if os.path.exists(os.path.join(current_path, f"{export_name}.mid")):
+                with open(os.path.join(current_path, f"{export_name}.txt"), 'r') as file:
+                    context.append(file.read())
+                    print(f"File {export_name} already exists. Adding to context and skipping generation.")
+            else:
+                midi_text = create_ai_midi(current_prompt, current_path, export_name, tempo, time_signature, context=context[-k:])
+                context.append(midi_text)
             
     except anthropic.APIError as e:
         print(f"An error occurred while calling the Anthropic API: {e}")
@@ -101,3 +129,4 @@ if __name__ == "__main__":
         print(f"Full traceback: {format_exc()}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}") 
+        print(f"Full traceback: {format_exc()}")

@@ -103,5 +103,8 @@ Details:
 Artistic and Stylistic Guidelines:
 - {description}
 
+
+- IMPORTANT: - Ensure ensure that in the note data you generate, no two notes of the same pitch and channel start at the same time. This is necessary for the midi export work.
+
 Do not include explanations or commentary. Only output the note data in the specified format.
 """

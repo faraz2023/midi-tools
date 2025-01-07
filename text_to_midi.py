@@ -14,6 +14,12 @@ ABLETON_DRUM_MAP = {
 
 NOTE_NAMES = {'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}
 
+def create_midi_from_text(input_text, filepath, tempo=120, time_signature=(4, 4)):
+    output_file = os.path.join(filepath)
+    text_to_midi(input_text, output_file, tempo, time_signature)
+    print(f"MIDI file '{filepath}' has been created.")
+
+
 def note_to_midi(note):
     """Convert note name (e.g., 'C4', 'F#5') to MIDI note number."""
     if note.lower() in ABLETON_DRUM_MAP:
@@ -75,86 +81,59 @@ def text_to_midi(input_text, output_file, tempo=120, time_signature=(4, 4)):
     with open(output_file, "wb") as output_file:
         midi.writeFile(output_file)
 
-# Example usage
-def create_midi_from_text(input_text, filename, tempo=120, time_signature=(4, 4)):
-    output_file = os.path.join(EXPORT_PATH, filename)
-    text_to_midi(input_text, output_file, tempo, time_signature)
-    print(f"MIDI file '{filename}' has been created.")
+
 
 
 if __name__ == "__main__":
     # Example 1: Simple melody
     text_input = """
-0 A3 2.0 40 0
-2 C4 1.0 45 0
-3 E4 2.0 50 0
-5 A3 0.5 55 0
-5.5 C4 0.5 50 0
-6 E4 1.0 55 0
-7 G4 1.0 60 0
-8 A4 2.0 65 0
-10 E4 0.75 60 0
-10.75 G4 0.25 65 0
-11 A4 1.0 70 0
-12 C5 1.5 75 0
-13.5 B4 0.25 70 0
-13.75 A4 0.25 65 0
-14 G4 1.0 60 0
-15 E4 1.0 55 0
-16 A3 1.5 50 0
-17.5 C4 0.25 55 0
-17.75 E4 0.25 60 0
-18 A4 2.0 65 0
-20 G4 0.5 60 0
-20.5 E4 0.5 55 0
-21 C4 1.0 50 0
-22 D4 1.0 55 0
-23 E4 1.5 60 0
-24.5 G4 0.75 65 0
-25.25 A4 0.75 70 0
-26 C5 1.0 75 0
-27 B4 0.5 70 0
-27.5 A4 0.5 65 0
-28 G4 1.0 60 0
-29 E4 1.0 55 0
-30 A3 1.5 50 0
-31.5 B3 0.25 55 0
-31.75 C4 0.25 60 0
-32 E4 2.0 65 0
-34 A4 0.75 70 0
-34.75 G4 0.25 65 0
-35 E4 1.0 60 0
-36 C4 1.0 55 0
-37 D4 1.5 60 0
-38.5 E4 0.75 65 0
-39.25 G4 0.75 70 0
-40 A4 2.0 75 0
-42 C5 0.5 80 0
-42.5 B4 0.5 75 0
-43 A4 1.0 70 0
-44 G4 1.0 65 0
-45 E4 1.5 60 0
-46.5 C4 0.25 55 0
-46.75 D4 0.25 60 0
-47 E4 1.0 65 0
-48 A4 2.0 70 0
-50 G4 0.75 65 0
-50.75 E4 0.25 60 0
-51 C4 1.0 55 0
-52 D4 1.0 60 0
-53 E4 1.5 65 0
-54.5 G4 0.75 70 0
-55.25 A4 0.75 75 0
-56 C5 1.0 80 0
-57 E5 0.5 85 0
-57.5 D5 0.5 80 0
-58 B4 1.0 75 0
-59 G4 1.0 70 0
-60 A4 3.0 65 0
-63 G4 0.5 60 0
-63.5 E4 0.5 55 0
+0 kick 0.25 110 9
+1 clap 0.25 90 9
+2 kick 0.25 100 9
+2.5 closed_hat 0.25 80 9
+3 clap 0.25 85 9
+3.5 closed_hat 0.25 75 9
+4 kick 0.25 105 9
+5 clap 0.25 88 9
+6 kick 0.25 98 9
+6.5 closed_hat 0.25 78 9
+7 clap 0.25 82 9
+7.5 open_hat 0.25 70 9
+8 kick 0.25 108 9
+9 clap 0.25 92 9
+10 kick 0.25 102 9
+10.5 closed_hat 0.25 82 9
+11 clap 0.25 87 9
+11.5 closed_hat 0.25 77 9
+12 kick 0.25 107 9
+13 clap 0.25 91 9
+14 kick 0.25 101 9
+14.5 closed_hat 0.25 81 9
+15 clap 0.25 86 9
+15.5 open_hat 0.25 72 9
+16 kick 0.25 112 9
+17 clap 0.25 94 9
+18 kick 0.25 104 9
+18.5 closed_hat 0.25 84 9
+19 clap 0.25 89 9
+19.5 closed_hat 0.25 79 9
+20 kick 0.25 109 9
+21 clap 0.25 93 9
+22 kick 0.25 103 9
+22.5 closed_hat 0.25 83 9
+23 clap 0.25 88 9
+23.5 open_hat 0.25 74 9
+24 kick 0.25 111 9
+25 clap 0.25 95 9
+26 kick 0.25 105 9
+26.5 closed_hat 0.25 85 9
+27 clap 0.25 90 9
+27.5 closed_hat 0.25 80 9
+28 kick 0.25 110 9
+29 clap 0.25 96 9
+30 kick 0.25 106 9
+30.5 closed_hat 0.25 86 9
+31 clap 0.25 91 9
+31.5 open_hat 0.25 76 9
     """
-    create_midi_from_text(text_input, "V_waves_melody_1.mid", tempo=90)
-
-
-
+    create_midi_from_text(text_input, "V_waves_drums_c01_1.mid", tempo=80)

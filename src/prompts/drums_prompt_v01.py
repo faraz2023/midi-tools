@@ -75,5 +75,6 @@ Details:
 Artistic and Stylistic Guidelines:
 - {description}
 
+
 Do not include explanations or commentary. Only output the note data in the specified format.
 """

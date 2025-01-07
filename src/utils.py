@@ -65,6 +65,9 @@ def text_to_midi(input_text, output_file, tempo=120, time_signature=(4, 4)):
     midi.addTimeSignature(0, 0, time_signature[0], int(math.log2(time_signature[1])), 24, 8)
 
     current_time = 0
+    print("--------------------------------")
+    print(input_text)
+    print("--------------------------------")
     for line in input_text.split('\n'):
         try:
             note_data, current_time = parse_note_line(line, current_time)
