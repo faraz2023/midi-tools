@@ -25,7 +25,7 @@ SOUNDFONTS = {
 
 def midi_to_audio(midi_path, instrument_type="piano"):
     """Convert MIDI to audio using FluidSynth"""
-    output_path = midi_path.replace('.mid', '.mp3')
+    output_path = midi_path.replace('.mid', '.wav')
     fs = FluidSynth(sound_font=SOUNDFONTS[instrument_type])
     fs.midi_to_audio(midi_path, output_path)
     return output_path
@@ -192,6 +192,12 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
             loop_type = gr.Dropdown(choices=list(loop_types.keys()), label="Loop Type", value="drums")
             
             with gr.Accordion("Composition Parameters", open=True):  # Changed to open by default
+
+                instrument_type = gr.Radio(
+                    choices=["piano", "drums"],
+                    label="Preview Sound",
+                    value="piano"
+                )
                 output_type = gr.Textbox(label="Output Type", interactive=True)
                 instrument = gr.Textbox(label="Instrument", interactive=True)
                 per_file_length = gr.Number(label="Chunk Length (bars)", precision=0, interactive=True)
@@ -204,11 +210,7 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
                 n_chunks = gr.Number(label="Number of Chunks", value=1, precision=0, interactive=True)
                 k_context = gr.Number(label="Context Window", value=1, precision=0, interactive=True)
 
-                instrument_type = gr.Radio(
-                    choices=["piano", "drums"],
-                    label="Preview Sound",
-                    value="piano"
-                )
+                
         
         with gr.Column(scale=2):
             generate_btn = gr.Button("✨ Imagine the Tune!", variant="primary")
