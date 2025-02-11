@@ -19,8 +19,8 @@ client = anthropic.Anthropic(
 #         return file.read()
 
 
-def get_anthropic_results(messages, system_prompt=[], model="claude-3-5-sonnet-20240620", max_tokens=4096, temperature=0):
-    
+def get_anthropic_results(messages, system_prompt=[], model="claude-3-5-sonnet-20241022", max_tokens=4096, temperature=0, api_key=None):
+    client = anthropic.Anthropic(api_key=api_key)
     message = client.messages.create(
         model=model,
         max_tokens=max_tokens,
@@ -31,25 +31,31 @@ def get_anthropic_results(messages, system_prompt=[], model="claude-3-5-sonnet-2
     return message.content
 
 
-def generate_midi_text(prompt, context=[]):
+def generate_midi_text(prompt, system_prompt, context=[], api_key=None):
     messages = []
     for prev_output in context:
         messages.append({"role": "assistant", "content": prev_output})
     messages.append({"role": "user", "content": prompt})
+    return get_anthropic_results(messages, system_prompt, api_key=api_key)
 
-    # Pass the system prompt as a top-level parameter
-    return get_anthropic_results(messages, system_prompt)
-
-def create_ai_midi(prompt, export_path, filename, tempo=120, time_signature=(4, 4), context=[]):
+def create_ai_midi(prompt, system_prompt, export_path, filename, tempo=120,
+                time_signature=(4, 4), context=[], api_key=None, curr_chunk_id=None, full_num_chunks=None):
     """Generate MIDI text using Claude API and create a MIDI file."""
+
+    if curr_chunk_id is not None:
+        prompt = f"{prompt}\n\n This works will have {full_num_chunks} parts. This is part {curr_chunk_id} of {full_num_chunks} of the loop. Write the current loop with the exact requested bar length and make sure it fits the larger narrative of the piece."
 
     if context:
         prompt = f"{prompt}\n\n To help you generate a better high quality output, we provide the previous pieces of the loop as context:"
         for prev_output in context:
             prompt += f"\n\n{prev_output}"
             prompt += "\n\n"
+
+
+    # print("!!!! prompt: ", prompt)
+    # print("!!!! system prompt: ", system_prompt)
         
-    LLM_out = generate_midi_text(prompt, context)
+    LLM_out = generate_midi_text(prompt, system_prompt, context, api_key=api_key)
     midi_text = LLM_out[0].text
     
     # The generated text should already be clean, but let's ensure it
@@ -64,6 +70,10 @@ def create_ai_midi(prompt, export_path, filename, tempo=120, time_signature=(4, 
 
     midi_export_path = os.path.join(export_path, f"{filename}.mid")
     
+
+    print("!!!! cleaned midi text: ", cleaned_midi_text)
+    print("!!!! Tempo: ", tempo)
+    print("!!!! Time signature: ", time_signature)
     create_midi_from_text(cleaned_midi_text, midi_export_path, tempo, time_signature)
     print(f"AI-generated MIDI file '{midi_export_path}' has been created.")
     return midi_text
@@ -89,8 +99,8 @@ if __name__ == "__main__":
         # from src.prompts.drums_prompt_v01 import prompt, system_prompt, tempo, time_signature
         # from src.prompts.chord_prompt_v01 import prompt, system_prompt, tempo, time_signature
         # from src.prompts.bassline_prompt_v01 import prompt, system_prompt, tempo, time_signature, per_file_length
-        from src.prompts.techno_drums_prompt_v01 import prompt, system_prompt, tempo, time_signature, per_file_length
-        EXPORT_PATH = os.path.join('.', 'MIDI_files_v02')
+        from src.prompts.twin_peaks_sunset.drums_prompt_v01 import prompt, system_prompt, tempo, time_signature, per_file_length
+        EXPORT_PATH = os.path.join('.', 'MIDI_files_v02', 'twin_peaks_sunset')
         os.makedirs(EXPORT_PATH, exist_ok=True)
 
         
@@ -120,7 +130,7 @@ if __name__ == "__main__":
                     context.append(file.read())
                     print(f"File {export_name} already exists. Adding to context and skipping generation.")
             else:
-                midi_text = create_ai_midi(current_prompt, current_path, export_name, tempo, time_signature, context=context[-k:])
+                midi_text = create_ai_midi(current_prompt, system_prompt, current_path, export_name, tempo, time_signature, context=context[-k:])
                 context.append(midi_text)
             
     except anthropic.APIError as e:
