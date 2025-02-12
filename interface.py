@@ -182,7 +182,7 @@ css = """
 """
 
 with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
-    gr.HTML("<h1 id='title'>Dr. Khoshbakhtian's Cabinet of Familiar Tunes</h1>")
+    gr.HTML("<h1 id='title'>Ferri's Cabinet of Familiar Tunes</h1>")
     
     with gr.Row():
         api_key = gr.Textbox(label="🔑 Anthropic API Key", placeholder="Enter your API key here...", type="password")
@@ -335,4 +335,8 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(debug=True)
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=443 if "REPL_SLUG" in os.environ else 7860,
+        share=True
+    )

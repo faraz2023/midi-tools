@@ -1,0 +1,15 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.mid
+gradio_output_midi/
+.DS_Store
+.ipynb_checkpoints
+*.ipynb 
