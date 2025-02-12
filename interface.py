@@ -15,7 +15,8 @@ loop_types = {
     "bassline": "src.prompts_gradio.bassline_prompt_v01",
     "chords": "src.prompts_gradio.chord_prompt_v01",
     "melody": "src.prompts_gradio.melody_prompt_v01",
-    "drums": "src.prompts_gradio.drums_prompt_v01"
+    "drums": "src.prompts_gradio.drums_prompt_v01",
+    "chords+melody": "src.prompts_gradio.chord_melody_prompt_v01"
 }
 
 # Get soundfonts directory from environment or use default
