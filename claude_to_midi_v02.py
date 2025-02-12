@@ -31,12 +31,12 @@ def get_anthropic_results(messages, system_prompt=[], model="claude-3-5-sonnet-2
     return message.content
 
 
-def generate_midi_text(prompt, system_prompt, context=[], api_key=None):
+def generate_midi_text(prompt, system_prompt, context=[], api_key=None, temperature=0.2):
     messages = []
     for prev_output in context:
         messages.append({"role": "assistant", "content": prev_output})
     messages.append({"role": "user", "content": prompt})
-    return get_anthropic_results(messages, system_prompt, api_key=api_key)
+    return get_anthropic_results(messages, system_prompt, api_key=api_key, temperature=temperature)
 
 def create_ai_midi(prompt, system_prompt, export_path, filename, tempo=120,
                 time_signature=(4, 4), context=[], api_key=None, curr_chunk_id=None, full_num_chunks=None):
@@ -55,7 +55,7 @@ def create_ai_midi(prompt, system_prompt, export_path, filename, tempo=120,
     # print("!!!! prompt: ", prompt)
     # print("!!!! system prompt: ", system_prompt)
         
-    LLM_out = generate_midi_text(prompt, system_prompt, context, api_key=api_key)
+    LLM_out = generate_midi_text(prompt, system_prompt, context, api_key=api_key, temperature=0.2)
     midi_text = LLM_out[0].text
     
     # The generated text should already be clean, but let's ensure it
