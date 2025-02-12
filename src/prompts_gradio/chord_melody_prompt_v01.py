@@ -37,18 +37,27 @@ Artistic and Stylistic Guidelines:
 Below are some example formats (do not copy these verbatim, they are for reference ONLY):
 
 Example Chord-Melody Combination with chord notes (lower register) and melody notes (higher register) (1 bar) (DO NOT USE FOR ARTISTIC REFERENCE, JUST A TECHNICAL FORMAT EXAMPLE):
-0 C3 2 70 0
-0 E3 2 70 0
-0 G3 2 70 0
-2 F3 2 70 0
-2 A3 2 70 0
-2 C4 2 70 0
-0 E4 0.5 90 0
-0.5 G4 0.5 85 0
-1 C5 0.75 95 0
-1.75 B4 0.25 80 0
-2 A4 1 90 0
-3 G4 1 85 0
+0 C2 2 65 0
+0 E2 2 60 0
+0 G2 2 60 0
+2 F2 2 65 0
+2 A2 2 60 0
+2 C3 2 60 0
+0 E3 0.25 85 0
+0.25 G3 0.125 75 0
+0.375 A3 0.125 80 0
+0.5 C4 0.5 90 0
+1 B3 0.25 85 0
+1.25 A3 0.25 80 0
+1.5 G3 0.25 75 0
+1.75 E3 0.25 70 0
+2 F3 0.75 95 0
+2.75 G3 0.25 85 0
+3 A3 0.375 90 0
+3.375 G3 0.125 80 0
+3.5 E3 0.5 85 0
+
+
 
 Currently requested loop type is: {output_type}
 """
