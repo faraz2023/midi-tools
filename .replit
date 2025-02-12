@@ -1,4 +1,4 @@
-run = "python interface.py"
+run = "git lfs install && git lfs pull && python interface.py"
 language = "python3"
 entrypoint = "interface.py"
 
@@ -8,7 +8,8 @@ channel = "stable-22_11"
 [env]
 PYTHONPATH = "${PYTHONPATH}:${REPL_HOME}"
 LD_LIBRARY_PATH = "${REPL_HOME}/lib:/usr/lib64"
+SOUNDFONTS_DIR = "${REPL_HOME}/soundfonts"
 
 [deployment]
-run = ["python", "interface.py"]
+run = ["sh", "-c", "git lfs install && git lfs pull && python interface.py"]
 deploymentTarget = "cloudrun"

@@ -8,5 +8,6 @@
         pkgs.libsndfile
         pkgs.readline
         pkgs.ncurses
+        pkgs.git-lfs
     ];
 }

@@ -18,15 +18,21 @@ loop_types = {
     "drums": "src.prompts_gradio.drums_prompt_v01"
 }
 
+# Get soundfonts directory from environment or use default
+SOUNDFONTS_DIR = os.getenv('SOUNDFONTS_DIR', 'soundfonts')
 SOUNDFONTS = {
-    "piano": "soundfonts/piano.sf2",  # You'll need to provide appropriate soundfont files
-    "drums": "soundfonts/drums.sf2"
+    "piano": os.path.join(SOUNDFONTS_DIR, "piano.sf2"),
+    "drums": os.path.join(SOUNDFONTS_DIR, "drums.sf2")
 }
 
 def midi_to_audio(midi_path, instrument_type="piano"):
     """Convert MIDI to audio using FluidSynth"""
     output_path = midi_path.replace('.mid', '.wav')
-    fs = FluidSynth(sound_font=SOUNDFONTS[instrument_type])
+    # Use default.sf2 as fallback if specific soundfont doesn't exist
+    soundfont_path = SOUNDFONTS[instrument_type]
+    if not os.path.exists(soundfont_path):
+        soundfont_path = os.path.join(SOUNDFONTS_DIR, "default.sf2")
+    fs = FluidSynth(sound_font=soundfont_path)
     fs.midi_to_audio(midi_path, output_path)
     return output_path
 
