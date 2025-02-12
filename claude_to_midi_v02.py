@@ -36,10 +36,11 @@ def generate_midi_text(prompt, system_prompt, context=[], api_key=None, temperat
     for prev_output in context:
         messages.append({"role": "assistant", "content": prev_output})
     messages.append({"role": "user", "content": prompt})
+    print("!! Calling anthropic api with temperature: ", temperature)
     return get_anthropic_results(messages, system_prompt, api_key=api_key, temperature=temperature)
 
 def create_ai_midi(prompt, system_prompt, export_path, filename, tempo=120,
-                time_signature=(4, 4), context=[], api_key=None, curr_chunk_id=None, full_num_chunks=None):
+                time_signature=(4, 4), context=[], api_key=None, curr_chunk_id=None, full_num_chunks=None, temperature=0.2):
     """Generate MIDI text using Claude API and create a MIDI file."""
 
     if curr_chunk_id is not None:
@@ -55,7 +56,7 @@ def create_ai_midi(prompt, system_prompt, export_path, filename, tempo=120,
     # print("!!!! prompt: ", prompt)
     # print("!!!! system prompt: ", system_prompt)
         
-    LLM_out = generate_midi_text(prompt, system_prompt, context, api_key=api_key, temperature=0.2)
+    LLM_out = generate_midi_text(prompt, system_prompt, context, api_key=api_key, temperature=temperature)
     midi_text = LLM_out[0].text
     
     # The generated text should already be clean, but let's ensure it

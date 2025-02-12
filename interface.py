@@ -58,7 +58,7 @@ def load_loop_defaults(loop_type):
 
 def generate_midi(api_key, loop_type, output_type, instrument, per_file_length, tempo, 
                  time_signature_num, time_signature_den, key, genre, description, 
-                 n_chunks, k_context, instrument_type, progress=gr.Progress()):
+                 n_chunks, k_context, instrument_type, temperature, progress=gr.Progress()):
     
     if not api_key:
         raise gr.Error("Please enter your Anthropic API key")
@@ -121,7 +121,8 @@ def generate_midi(api_key, loop_type, output_type, instrument, per_file_length, 
                     context=context[-context_i:],
                     api_key=api_key,
                     curr_chunk_id=i+1,
-                    full_num_chunks=n_chunks
+                    full_num_chunks=n_chunks,
+                    temperature=temperature
                 )
                 context.append(midi_text)
                 midi_files.append(os.path.join(tmpdir, f"{i+1}.mid"))
@@ -205,6 +206,7 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
                     label="Preview Sound",
                     value="piano"
                 )
+                temperature = gr.Number(label="Temperature", value=0.2, precision=3, interactive=True)
                 output_type = gr.Textbox(label="Output Type", interactive=True)
                 instrument = gr.Textbox(label="Instrument", interactive=True)
                 per_file_length = gr.Number(label="Chunk Length (bars)", precision=0, interactive=True)
@@ -301,7 +303,8 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
             description,
             n_chunks,
             k_context,
-            instrument_type
+            instrument_type,
+            temperature
         ],
         outputs=[
             output_midi,
@@ -381,8 +384,9 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=443 if "REPL_SLUG" in os.environ else 7860,
-        share=True
-    )
+    demo.launch()
+    # demo.launch(
+    #     server_name="0.0.0.0",
+    #     server_port=443 if "REPL_SLUG" in os.environ else 7860,
+    #     share=True
+    # )
