@@ -228,16 +228,51 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
             # Audio preview
             audio_preview = gr.Audio(label="Preview", visible=False)
             
+            # Prompt display boxes
+            with gr.Row():
+                system_prompt_display = gr.Textbox(label="System Prompt", interactive=False, visible=False, lines=10)
+                base_prompt_display = gr.Textbox(label="Base Prompt", interactive=False, visible=False, lines=10)
+            
             error_box = gr.Textbox(visible=False)
 
 
     def on_generate_click(*args):
         try:
+            # Load the prompt module
+            prompt_module = importlib.import_module(loop_types[args[1]])  # args[1] is loop_type
+            
+            # Create time signature tuple
+            time_signature = (int(args[6]), int(args[7]))  # args[6] and args[7] are time_signature_num and time_signature_den
+            
+            # Generate system prompt and user prompt
+            system_prompt = prompt_module.get_system_prompt(
+                output_type=args[2],  # output_type
+                per_file_length=args[4],  # per_file_length
+                genre=args[9],  # genre
+                instrument=args[3],  # instrument
+                tempo=args[5],  # tempo
+                time_signature=time_signature,
+                key=args[8]  # key
+            )
+            
+            base_prompt = prompt_module.get_prompt(
+                output_type=args[2],  # output_type
+                instrument=args[3],  # instrument
+                per_file_length=args[4],  # per_file_length
+                tempo=args[5],  # tempo
+                time_signature=time_signature,
+                key=args[8],  # key
+                genre=args[9],  # genre
+                description=args[10]  # description
+            )
+            
             midi_path, txt_path, audio_path = generate_midi(*args)
             return [
                 gr.File(value=midi_path, visible=True),
                 gr.File(value=txt_path, visible=True),
                 gr.Audio(value=audio_path, visible=True),
+                gr.Textbox(value=system_prompt, visible=True, lines=10),
+                gr.Textbox(value=base_prompt, visible=True, lines=10),
                 gr.Textbox(visible=False)
             ]
         except Exception as e:
@@ -245,6 +280,8 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
                 gr.File(visible=False),
                 gr.File(visible=False),
                 gr.Audio(visible=False),
+                gr.Textbox(visible=False),
+                gr.Textbox(visible=False),
                 gr.Textbox(value=str(e), visible=True)
             ]
         
@@ -270,6 +307,8 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
             output_midi,
             output_txt,
             audio_preview,
+            system_prompt_display,
+            base_prompt_display,
             error_box
         ]
     )
