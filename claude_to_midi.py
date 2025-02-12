@@ -21,7 +21,7 @@ def generate_midi_text(prompt):
     message = client.messages.create(
         model="claude-3-opus-20240229",
         max_tokens=4096,
-        temperature=0,  # Using 0 for deterministic output
+        temperature=0.2,  # Using 0 for deterministic output
         messages=[
             {"role": "user", "content": prompt}
         ]
