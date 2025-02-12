@@ -62,8 +62,10 @@ def text_to_midi(input_text, output_file, tempo=120, time_signature=(4, 4)):
     """Convert text-based note sequence to a single MIDI file."""
     midi = MIDIFile(1)  # One track
     midi.addTempo(0, 0, tempo)
-    midi.addTimeSignature(0, 0, time_signature[0], int(math.log2(time_signature[1])), 24, 8)
+    midi.addTimeSignature(0, 0, time_signature[0], time_signature[1], 24, 8)
 
+
+    beats_per_bar = time_signature[0]
     current_time = 0
     print("--------------------------------")
     print(input_text)
@@ -72,11 +74,24 @@ def text_to_midi(input_text, output_file, tempo=120, time_signature=(4, 4)):
         try:
             note_data, current_time = parse_note_line(line, current_time)
             if note_data:
+                print("!!!! note data: ", note_data)
                 time, pitch, duration, velocity, channel = note_data
+
+                #fix time stuff
+                time = time/4
+                duration = duration/4
                 midi.addNote(0, channel, pitch, time, duration, velocity)
         except ValueError as e:
             print(f"Error parsing line: {line}")
             print(f"Error message: {str(e)}")
 
+
+    print("From text to midi: ", midi.__dict__)
+    # recurservily print all the midi parmters in __dict__ and inner __dict__
+    for key, value in midi.__dict__.items():
+        print(f"{key}: {value}")
+        if isinstance(value, dict):
+            for inner_key, inner_value in value.items():
+                print(f"  {inner_key}: {inner_value}")
     with open(output_file, "wb") as output_file:
         midi.writeFile(output_file)
