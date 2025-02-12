@@ -384,9 +384,9 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch()
-    # demo.launch(
-    #     server_name="0.0.0.0",
-    #     server_port=443 if "REPL_SLUG" in os.environ else 7860,
-    #     share=True
-    # )
+    # demo.launch()
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=443 if "REPL_SLUG" in os.environ else 7860,
+        share=True
+    )
