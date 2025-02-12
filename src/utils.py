@@ -62,7 +62,7 @@ def text_to_midi(input_text, output_file, tempo=120, time_signature=(4, 4)):
     """Convert text-based note sequence to a single MIDI file."""
     midi = MIDIFile(1)  # One track
     midi.addTempo(0, 0, tempo)
-    midi.addTimeSignature(0, 0, time_signature[0], time_signature[1], 24, 8)
+    midi.addTimeSignature(0, 0, time_signature[0], int(math.log2(time_signature[1])), 24, 8)
 
 
     beats_per_bar = time_signature[0]
