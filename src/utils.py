@@ -78,8 +78,8 @@ def text_to_midi(input_text, output_file, tempo=120, time_signature=(4, 4)):
                 time, pitch, duration, velocity, channel = note_data
 
                 #fix time stuff
-                time = time/2
-                duration = duration/2
+                time = time/4
+                duration = duration/4
                 midi.addNote(0, channel, pitch, time, duration, velocity)
         except ValueError as e:
             print(f"Error parsing line: {line}")
