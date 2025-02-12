@@ -5,6 +5,10 @@ entrypoint = "interface.py"
 [nix]
 channel = "stable-22_11"
 
+[env]
+PYTHONPATH = "${PYTHONPATH}:${REPL_HOME}"
+LD_LIBRARY_PATH = "${REPL_HOME}/lib:/usr/lib64"
+
 [deployment]
 run = ["python", "interface.py"]
 deploymentTarget = "cloudrun"
