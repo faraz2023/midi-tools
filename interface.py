@@ -189,7 +189,12 @@ css = """
 }
 """
 
-with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo:
+with gr.Blocks(
+    css=css, 
+    theme=gr.themes.Soft(),
+    title="TuneCabinet",
+    favicon_path="assets/favicon.svg" # Attribution: https://thenounproject.com/icon/plant-7564548/
+) as demo:
     gr.HTML("<h1 id='title'>Ferri's Cabinet of Familiar Tunes</h1>")
     
     with gr.Row():
